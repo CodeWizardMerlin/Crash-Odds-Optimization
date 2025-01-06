@@ -23,8 +23,17 @@ for index, value in enumerate(processed_points):
         highest_index = index
         highest_value = value
 
-print("optimal number: ", points_to_check[highest_index])
-print("highest value: ", processed_points[highest_index])
+number_of_points = len(all_datapoints)
+total_profit = highest_value - number_of_points
+profit_per_point = total_profit / number_of_points
+
+if total_profit > 0:
+    print("profitable")
+else:
+    print("not profitable")
+print("optimal number:", points_to_check[highest_index])
+print("total profit was a", str(round(total_profit, 2)) + "% multiplier of bet ammount over", number_of_points, "plays")
+print("average profit per play was", str(round(profit_per_point, 3)) + "% of inital bet")
 
 plt.plot(points_to_check, processed_points)
 plt.xlabel('Return based on chosen multiplier')
