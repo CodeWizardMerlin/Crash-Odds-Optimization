@@ -1,9 +1,8 @@
-from bs4 import BeautifulSoup
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 from LocalStorageEditor import LocalStorage
-import requests
 from time import sleep
+import os
 
 driver = webdriver.Firefox()
 driver.get("https://pg-stage.rpd.cloud/?partnerId=4&currency=USD&lan=en&gameId=34&mode=fun")
@@ -18,4 +17,16 @@ driver.refresh()
 
 sleep(3)
 driver.switch_to.frame(driver.find_element(By.CSS_SELECTOR, "#game-frame"))
-messy_data = driver.find_element(By.CLASS_NAME, "scrollable-container").text
+messy_data = driver.find_element(By.CLASS_NAME, "scrollable-container").text.split("\n")
+driver.quit()
+
+multipliers = []
+for data in messy_data:
+    if "x" in data:
+        multipliers.append(data[1:])
+
+with open("Raw data.txt", "a") as file:
+    if os.path.getsize("Raw data.txt") > 0:
+        file.write("\n")
+    for multiplier in multipliers:
+        file.write(multiplier + " ")
