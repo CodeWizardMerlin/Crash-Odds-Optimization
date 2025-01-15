@@ -9,14 +9,11 @@ import os
 
 stop_event = Event()
 
-root = None
-
 def on_stop():
     global root
     stop_event.set()
-    if root:
-        root.after(0, root.destroy)
-
+    root.quit()
+    
 def create_stop_button():
     global root
     root = tk.Tk()
@@ -66,7 +63,6 @@ while not stop_event.is_set():
     count = count + 1
     
     stop_event.wait(600)
-
 
 driver.quit()
 print("Program stopped")
