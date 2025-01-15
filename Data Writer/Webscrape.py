@@ -37,17 +37,19 @@ storage = LocalStorage(driver)
 initial_storage = storage.get("crash_34_userSettings")
 modified_storage = initial_storage.replace("null", "263") # 263 is the value normally assigned after clicking continue
 storage.set("crash_34_userSettings", modified_storage)
-driver.refresh()
-sleep(4) # wait for the page to load
 
 count = 0
 while not stop_event.is_set():
     current_time = datetime.now().strftime("%H:%M:%S")
     print("Start of loop", count, "- At time:", current_time)
+    
+    driver.refresh()
+    sleep(2) # wait for the page to load
     driver.switch_to.frame(driver.find_element(By.CSS_SELECTOR, "#game-frame"))
-    messy_data = driver.find_element(By.CLASS_NAME, "scrollable-container").text.split("\n")
 
+    messy_data = driver.find_element(By.CLASS_NAME, "scrollable-container").text.split("\n")
     multipliers = []
+
     for data in messy_data:
         if "x" in data:
             multipliers.append(data[1:])
@@ -60,8 +62,9 @@ while not stop_event.is_set():
     
     current_time = datetime.now().strftime("%H:%M:%S")
     print("End of loop", count, "- At time:", current_time)
-    count = count + 1
+    print()
     
+    count = count + 1
     stop_event.wait(600)
 
 driver.quit()
