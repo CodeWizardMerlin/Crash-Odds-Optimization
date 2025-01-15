@@ -57,8 +57,12 @@ while not stop_event.is_set() and limit != 40: # 40 loops is ~10 hours of data c
     print("End of loop", limit, "- At time:", current_time)
     limit = limit + 1
     if limit != 40:
-        stop_event.wait(900) # 15 minutes
+        for t in range(450): # wait 15 minutes
+            if stop_event.is_set():
+                break
+            sleep(2)
     else:
         print("Data collection complete")
 
 driver.quit()
+print("Program stopped")
