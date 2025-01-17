@@ -4,6 +4,7 @@ from LocalStorageEditor import LocalStorage
 from datetime import datetime
 from time import sleep
 from threading import Thread, Event
+from ..Data_Processing.Database import Database
 import tkinter as tk
 import os
 
@@ -28,6 +29,7 @@ def create_stop_button():
 button_thread = Thread(target=create_stop_button)
 button_thread.start()
 
+
 driver = webdriver.Firefox()
 driver.get("https://pg-stage.rpd.cloud/?partnerId=4&currency=USD&lan=en&gameId=34&mode=fun")
 
@@ -38,7 +40,7 @@ initial_storage = storage.get("crash_34_userSettings")
 modified_storage = initial_storage.replace("null", "263") # 263 is the value normally assigned after clicking continue
 storage.set("crash_34_userSettings", modified_storage)
 
-count = 0
+count = 1
 while not stop_event.is_set():
     current_time = datetime.now().strftime("%H:%M:%S")
     print("Start of loop", count, "- At time:", current_time)
@@ -68,4 +70,15 @@ while not stop_event.is_set():
     stop_event.wait(600)
 
 driver.quit()
-print("Program stopped")
+print("Do you want to add all current data to the database? This will clear the text file. (yes/no)")
+user_input = input().lower().strip()
+
+if (user_input == "yes"):
+    print("Program stopped - Data added to database")
+    db = Database()
+    db.process_file()
+    db.close()
+elif (user_input == "no"):
+    print("Program stopped - Data saved for review in Raw data.txt")
+else:
+    print("Invalid input - Data saved for review in Raw data.txt")

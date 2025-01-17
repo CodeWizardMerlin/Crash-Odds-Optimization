@@ -7,14 +7,10 @@ all_datapoints = db.get_all_data()
 points_to_check = sorted(list(set(all_datapoints)))
 processed_points = [0] * len(points_to_check)
 
-#could optimise to be faster with threads
-def process_data(index, point):
+for index, point in enumerate(points_to_check):
     for i in all_datapoints:
         if point <= i:
             processed_points[index] += point
-
-for index, point in enumerate(points_to_check):
-    process_data(index, point)
 
 highest_index = 0
 highest_value = 0

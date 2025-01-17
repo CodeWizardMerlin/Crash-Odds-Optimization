@@ -34,6 +34,15 @@ class Database:
             for value in data_values:
                 crash_point = float(value)
                 self.insert_data(crash_point)
+        open('file.txt', 'w').close() # clear the file after processing
+                
+    def add_from_file_without_clearing(self):
+        with open("Raw data.txt") as file:
+            raw_data = file.read()
+            data_values = raw_data.split()
+            for value in data_values:
+                crash_point = float(value)
+                self.insert_data(crash_point)
 
     def table_size(self):
         size = self.cursor.execute("SELECT COUNT(*) FROM crash_data").fetchone()[0]
