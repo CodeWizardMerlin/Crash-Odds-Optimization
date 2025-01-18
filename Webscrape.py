@@ -4,7 +4,7 @@ from LocalStorageEditor import LocalStorage
 from datetime import datetime
 from time import sleep
 from threading import Thread, Event
-from ..Data_Processing.Database import Database
+from Database import Database
 import tkinter as tk
 import os
 

@@ -34,7 +34,7 @@ class Database:
             for value in data_values:
                 crash_point = float(value)
                 self.insert_data(crash_point)
-        open('file.txt', 'w').close() # clear the file after processing
+        open("Raw data.txt", 'w').close() # clear the file after processing
                 
     def add_from_file_without_clearing(self):
         with open("Raw data.txt") as file:
