@@ -1,10 +1,10 @@
 from selenium import webdriver
 from selenium.webdriver.common.by import By
-from LocalStorageEditor import LocalStorage
+from local_storage_editor import LocalStorage
 from datetime import datetime
 from time import sleep
 from threading import Thread, Event
-from Database import Database
+from database import Database
 import tkinter as tk
 import os
 

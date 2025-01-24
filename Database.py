@@ -1,7 +1,7 @@
 import sqlite3
 
 class Database:
-    def __init__(self, db_name='data.db'):
+    def __init__(self, db_name="data.db"):
         self.connection = sqlite3.connect(db_name)
         self.cursor = self.connection.cursor()
         self.create_table()
@@ -34,7 +34,7 @@ class Database:
             for value in data_values:
                 crash_point = float(value)
                 self.insert_data(crash_point)
-        open("Raw data.txt", 'w').close() # clear the file after processing
+        open("Raw data.txt", "w").close() # clear the file after processing
                 
     def add_from_file_without_clearing(self):
         with open("Raw data.txt") as file:

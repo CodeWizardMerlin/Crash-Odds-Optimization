@@ -1,4 +1,4 @@
-from Database import Database
+from database import Database
 import matplotlib.pyplot as plt
 
 db = Database()
@@ -30,9 +30,9 @@ print("optimal number:", points_to_check[highest_index])
 print("total profit was a", str(round(total_profit, 3)) + "% multiplier of collective bet ammount over", number_of_points, "plays")
 
 plt.plot(points_to_check, processed_points)
-plt.xlabel('Return based on chosen multiplier')
-plt.ylabel('Processed Points')
-plt.title('Processed Points Line Graph')
+plt.xlabel("Return based on chosen multiplier")
+plt.ylabel("Processed Points")
+plt.title("Processed Points Line Graph")
 plt.show()
 
 db.close()
